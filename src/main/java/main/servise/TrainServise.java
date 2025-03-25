@@ -5,8 +5,8 @@ import main.logic.Train;
 import java.util.*;
 
 public class TrainServise {
-    public ArrayList<Train> findTrainByPointOfDestination(ArrayList<Train> trains,String pointOfDestination){
-        ArrayList<Train> result = new ArrayList<>();
+    public List<Train> findTrainByPointOfDestination(List<Train> trains,String pointOfDestination){
+        List<Train> result = new ArrayList<>();
         for (Train train : trains) {
             if (train.getPointOfDestination().equals(pointOfDestination)) {
                 result.add(train);
@@ -14,8 +14,8 @@ public class TrainServise {
         }
         return result;
     }
-    public ArrayList<Train> findTrainByDepartureTime(ArrayList<Train> trains,String departureTime){
-        ArrayList<Train> result = new ArrayList<>();
+    public List<Train> findTrainByDepartureTime(List<Train> trains,String departureTime){
+        List<Train> result = new ArrayList<>();
         for (Train train : trains) {
             double temp1;
             if(train.getDepartureTime().length()==5){
@@ -39,9 +39,9 @@ public class TrainServise {
         }
         return result;
     }
-    public ArrayList<Train> findTrainByPointOfDestinationAndNumberOfSeats
-            (ArrayList<Train> trains,String pointOfDestination,int n){
-        ArrayList<Train> result = new ArrayList<>();
+    public List<Train> findTrainByPointOfDestinationAndNumberOfSeats
+            (List<Train> trains,String pointOfDestination,int n){
+        List<Train> result = new ArrayList<>();
         for (Train train : trains) {
             if (train.getPointOfDestination().equals(pointOfDestination)
                     && train.getNumberOfSeats()>=n) {
@@ -51,13 +51,13 @@ public class TrainServise {
         return result;
     }
 
-    public ArrayList<Train> sortTrainsByNumberOfInitialStopsAndTrainNumber(ArrayList<Train> trains) {
+    public List<Train> sortTrainsByNumberOfInitialStopsAndTrainNumber(List<Train> trains) {
         trains.sort(Comparator.comparing(Train::getNumberOfIntermediateStops)
                 .thenComparing(Train::getTrainNumber));
         return trains;
     }
 
-    public Train findTrainByTrainNumberAndNumberOfIntermediateStops(ArrayList<Train> trains, long trainNumber, int numberOfIntermediateStops) {
+    public Train findTrainByTrainNumberAndNumberOfIntermediateStops(List<Train> trains, long trainNumber, int numberOfIntermediateStops) {
         for (Train train : trains) {
             if (train.getTrainNumber()==trainNumber) {
                 if (train.getNumberOfIntermediateStops()==numberOfIntermediateStops) {

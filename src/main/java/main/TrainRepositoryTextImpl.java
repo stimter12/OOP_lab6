@@ -8,7 +8,7 @@ import java.util.*;
 
 public class TrainRepositoryTextImpl implements TrainRepository {
     @Override
-    public void outputArray(ArrayList<Train> t, File file) {
+    public void outputArray(List<Train> t, File file) {
         try(PrintWriter outputStream = new PrintWriter(file)) {
             outputStream.println(t.size());
             for (Train train : t) {
@@ -20,16 +20,16 @@ public class TrainRepositoryTextImpl implements TrainRepository {
     }
 
     @Override
-    public void outputArray(ArrayList<Train> t, String fileName) {
+    public void outputArray(List<Train> t, String fileName) {
         File file = new File(fileName);
         outputArray(t, file);
     }
 
     @Override
-    public ArrayList<Train> readArray(File file) {
+    public List<Train> readArray(File file) {
         try (BufferedReader inputStream = new BufferedReader(new FileReader(file))) {
             int numberOfTrains = Integer.parseInt(inputStream.readLine());
-            ArrayList<Train> trains = new ArrayList<>(numberOfTrains);
+            List<Train> trains = new ArrayList<>(numberOfTrains);
             for (int i = 0; i < numberOfTrains; i++) {
                 String stringTrain = inputStream.readLine();
                 String[] stringTrainArray = stringTrain.split(",");
@@ -47,7 +47,7 @@ public class TrainRepositoryTextImpl implements TrainRepository {
     }
 
     @Override
-    public ArrayList<Train> readArray(String fileName) {
+    public List<Train> readArray(String fileName) {
         File file = new File(fileName);
         return readArray(file);
     }

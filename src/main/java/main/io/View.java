@@ -5,12 +5,12 @@ import main.TrainRepositoryTextImpl;
 import main.logic.Train;
 import main.servise.TrainServise;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Scanner;
 
 public class View {
     private final TrainServise trainService =  new TrainServise();
-    public void menu(ArrayList<Train> trains){
+    public void menu(List<Train> trains){
         int option=1;
         Scanner read=new Scanner(System.in);
         TrainRepositoryBinaryImpl trainRepositoryBinaryImpl=new TrainRepositoryBinaryImpl();
@@ -34,7 +34,7 @@ public class View {
                 case 1:
                     System.out.println("Enter point of destination:");
                     String pod=read.nextLine();
-                    ArrayList<Train> task1 = trainService.findTrainByPointOfDestination(trains, pod);
+                    List<Train> task1 = trainService.findTrainByPointOfDestination(trains, pod);
                     for(Train train : task1){
                         System.out.println(train);
                     }
@@ -43,7 +43,7 @@ public class View {
                 case 2:
                     System.out.println("Enter departure time:");
                     String dt=read.nextLine();
-                    ArrayList<Train> task2 = trainService.findTrainByDepartureTime(trains, dt);
+                    List<Train> task2 = trainService.findTrainByDepartureTime(trains, dt);
                     for(Train train : task2){
                         System.out.println(train);
                     }
@@ -54,13 +54,13 @@ public class View {
                     String pofd=read.nextLine();
                     System.out.println("Enter number of seats:");
                     int nos=Integer.parseInt(read.nextLine());
-                    ArrayList<Train> task3 = trainService.findTrainByPointOfDestinationAndNumberOfSeats(trains, pofd, nos);
+                    List<Train> task3 = trainService.findTrainByPointOfDestinationAndNumberOfSeats(trains, pofd, nos);
                     for(Train train : task3){
                         System.out.println(train);
                     }
                     break;
                 case 4:
-                    ArrayList<Train> task4 = trainService.sortTrainsByNumberOfInitialStopsAndTrainNumber(trains);
+                    List<Train> task4 = trainService.sortTrainsByNumberOfInitialStopsAndTrainNumber(trains);
                     for(Train train : task4){
                         System.out.println(train);
                     }
@@ -78,13 +78,13 @@ public class View {
                 case 6:
                     System.out.println("Enter filename to read:");
                     String readFileText=read.nextLine()+".txt";
-                    ArrayList<Train> trains1Text = trainRepositoryTextImpl.readArray(readFileText);
+                    List<Train> trains1Text = trainRepositoryTextImpl.readArray(readFileText);
                     trains.addAll(trains1Text);
                     break;
                 case 7:
                     System.out.println("Enter filename to read:");
                     String readFile=read.nextLine()+".txt";
-                    ArrayList<Train> trains1Binary = trainRepositoryBinaryImpl.readArray(readFile);
+                    List<Train> trains1Binary = trainRepositoryBinaryImpl.readArray(readFile);
                     trains.addAll(trains1Binary);
                     break;
                 case 8:

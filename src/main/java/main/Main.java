@@ -13,7 +13,7 @@ public class Main {
         new Main().run();
     }
     private void run(){
-        ArrayList<Train> trains = TrainFactory.createTrains();
+        List<Train> trains = TrainFactory.createTrains();
         view.menu(trains);
     }
 }

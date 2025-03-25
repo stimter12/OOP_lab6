@@ -11,8 +11,8 @@ public class TrainFactory {
         return new Train(id,pointOfDestination,trainNumber,departureTime,numberOfSeats,
                 travelTime, numberOfIntermediateStops);
     }
-    public static ArrayList<Train> createTrains(){
-         ArrayList<Train> trains = new ArrayList<>();
+    public static List<Train> createTrains(){
+         List<Train> trains = new ArrayList<>();
          trains.add(new Train(1,"Kuiv",4301,
                  "10:00",400,"2:00",2));
         trains.add(new Train(2,"Kherson",4625,
