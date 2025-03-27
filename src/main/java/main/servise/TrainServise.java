@@ -51,20 +51,32 @@ public class TrainServise {
         return result;
     }
 
-    public List<Train> sortTrainsByNumberOfInitialStopsAndTrainNumber(List<Train> trains) {
+    public List<Train> sortTrainsByNumberOfIntermediateStopsAndTrainNumber(List<Train> trains) {
         trains.sort(Comparator.comparing(Train::getNumberOfIntermediateStops)
                 .thenComparing(Train::getTrainNumber));
         return trains;
     }
 
-    public Train findTrainByTrainNumberAndNumberOfIntermediateStops(List<Train> trains, long trainNumber, int numberOfIntermediateStops) {
+    public Train findTrainByIdAndNumberOfIntermediateStops(List<Train> trains, int id, int numberOfIntermediateStops) {
         for (Train train : trains) {
-            if (train.getTrainNumber()==trainNumber) {
+            if (train.getId()==id) {
                 if (train.getNumberOfIntermediateStops()==numberOfIntermediateStops) {
                     return train;
                 }
             }
         }
         return null;
+    }
+    public String showTrains(List<Train>  trains) {
+        StringBuilder resultTrains = new StringBuilder();
+        for (Train train : trains) {
+            resultTrains.append(train.ShowToString());
+        }
+        return resultTrains.toString();
+    }
+
+    public String showTrainsFields() {
+        return "id  point of destination  train number  departure time" +
+                "  number of seats  travel time  number of intermediate stops";
     }
 }

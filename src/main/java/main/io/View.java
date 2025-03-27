@@ -15,14 +15,18 @@ public class View {
         Scanner read=new Scanner(System.in);
         TrainRepositoryBinaryImpl trainRepositoryBinaryImpl=new TrainRepositoryBinaryImpl();
         TrainRepositoryTextImpl trainRepositoryTextImpl=new TrainRepositoryTextImpl();
+        int id;
+        String pointOfDestination;
+        String departureTime;
+        int numberOfIntermediateStops;
         while (option != 0) {
             System.out.println(
                     """
                             1. Find trains by point of destination
                             2. Find trains by departure time
                             3. Find trains by point of destination and number of seats
-                            4. Sort trains by number of initial stops and when matched by train number
-                            5. Find train by train number and  number of intermediate stops
+                            4. Sort trains by number of intermediate stops and when matched by train number
+                            5. Find train by id and  number of intermediate stops
                             6. Read file text
                             7. Read file binary
                             8. Write in file text
@@ -33,59 +37,53 @@ public class View {
             switch (option) {
                 case 1:
                     System.out.println("Enter point of destination:");
-                    String pod=read.nextLine();
-                    List<Train> task1 = trainService.findTrainByPointOfDestination(trains, pod);
-                    for(Train train : task1){
-                        System.out.println(train);
-                    }
-                    System.out.println();
+                    pointOfDestination=read.nextLine();
+                    List<Train> task1 = trainService.findTrainByPointOfDestination(trains, pointOfDestination);
+                    System.out.println(trainService.showTrainsFields());
+                    System.out.println(trainService.showTrains(task1));
                     break;
                 case 2:
                     System.out.println("Enter departure time:");
-                    String dt=read.nextLine();
-                    List<Train> task2 = trainService.findTrainByDepartureTime(trains, dt);
-                    for(Train train : task2){
-                        System.out.println(train);
-                    }
-                    System.out.println();
+                    departureTime=read.nextLine();
+                    List<Train> task2 = trainService.findTrainByDepartureTime(trains, departureTime);
+                    System.out.println(trainService.showTrainsFields());
+                    System.out.println(trainService.showTrains(task2));
                     break;
                 case 3:
                     System.out.println("Enter point of destination:");
-                    String pofd=read.nextLine();
+                    String pointOfDestination1=read.nextLine();
                     System.out.println("Enter number of seats:");
                     int nos=Integer.parseInt(read.nextLine());
-                    List<Train> task3 = trainService.findTrainByPointOfDestinationAndNumberOfSeats(trains, pofd, nos);
-                    for(Train train : task3){
-                        System.out.println(train);
-                    }
+                    List<Train> task3 = trainService.findTrainByPointOfDestinationAndNumberOfSeats(trains, pointOfDestination1, nos);System.out.println(trainService.showTrainsFields());
+                    System.out.println(trainService.showTrains(task3));
                     break;
                 case 4:
-                    List<Train> task4 = trainService.sortTrainsByNumberOfInitialStopsAndTrainNumber(trains);
-                    for(Train train : task4){
-                        System.out.println(train);
-                    }
+                    List<Train> task4 = trainService.sortTrainsByNumberOfIntermediateStopsAndTrainNumber(trains);
+                    System.out.println(trainService.showTrainsFields());
+                    System.out.println(trainService.showTrains(task4));
                     break;
                 case 5:
-                    System.out.println("Enter train number:");
-                    long trainNumber=Long.parseLong(read.nextLine());
+                    System.out.println("Enter id:");
+                    id=Integer.parseInt(read.nextLine());
                     System.out.println("Enter number of intermediate stops:");
-                    int numberOfIntermediateStops=Integer.parseInt(read.nextLine());
+                    numberOfIntermediateStops=Integer.parseInt(read.nextLine());
                     Train task5 = trainService
-                            .findTrainByTrainNumberAndNumberOfIntermediateStops(trains,trainNumber,numberOfIntermediateStops);
-                        if(task5!=null)System.out.println(task5);
-                        else System.out.println("Train not found");
+                            .findTrainByIdAndNumberOfIntermediateStops(trains,id,numberOfIntermediateStops);
+                    if(task5!=null) {
+                        System.out.println(trainService.showTrainsFields());
+                        System.out.println(task5.ShowToString());
+                    }
+                    else System.out.println("Train not found");
                     break;
                 case 6:
                     System.out.println("Enter filename to read:");
                     String readFileText=read.nextLine()+".txt";
-                    List<Train> trains1Text = trainRepositoryTextImpl.readArray(readFileText);
-                    trains.addAll(trains1Text);
+                    trains = trainRepositoryTextImpl.readArray(readFileText);
                     break;
                 case 7:
                     System.out.println("Enter filename to read:");
                     String readFile=read.nextLine()+".txt";
-                    List<Train> trains1Binary = trainRepositoryBinaryImpl.readArray(readFile);
-                    trains.addAll(trains1Binary);
+                    trains = trainRepositoryBinaryImpl.readArray(readFile);
                     break;
                 case 8:
                     System.out.println("Enter filename to write:");
